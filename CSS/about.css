@@ -1,0 +1,153 @@
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #000;
+      line-height: 1.6;
+  }
+  
+  header {
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .logo {
+      font-weight: bold;
+      font-size: 24px;
+  }
+  
+  .logo span {
+      color: #00AEEF;
+  }
+  
+  nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+  }
+  
+  nav a.active {
+      background: #000;
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 20px;
+  }
+  
+  .socials a {
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+  }
+  
+  .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px;
+  }
+  
+  .hero-text {
+      max-width: 60%;
+  }
+  
+  .hero-text h1 {
+      font-size: 48px;
+      line-height: 1.2;
+  }
+  
+  .hero-text .name {
+      font-family: cursive;
+      color: #00AEEF;
+  }
+  
+  .hero-text .uiux {
+      color: #00AEEF;
+      font-weight: bold;
+  }
+  
+  .hero-text .frontend {
+      color: #FBB040;
+      font-weight: bold;
+  }
+  
+  .hero-text .title {
+      font-weight: 900;
+  }
+  
+  .hero-text .and {
+      font-weight: bold;
+  }
+  
+  .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+  }
+  
+  .hero-image img {
+      max-width: 300px;
+      border-radius: 20px;
+  }
+  /* About Section */
+  
+  .about {
+      display: flex;
+      align-items: center;
+      padding: 60px;
+      background: #f9f9f9;
+  }
+  
+  .about-image img {
+      max-width: 250px;
+      border-radius: 20px;
+      margin-right: 50px;
+  }
+  
+  .about-text {
+      max-width: 60%;
+  }
+  
+  .about-text h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+  }
+  
+  .about-text p {
+      font-size: 18px;
+  }
+  
+  @media (max-width: 768px) {
+      .hero {
+          flex-direction: column;
+          text-align: center;
+      }
+      .hero-text {
+          max-width: 100%;
+      }
+      .hero-image {
+          margin-top: 30px;
+      }
+      .about {
+          flex-direction: column;
+          text-align: center;
+      }
+      .about-image img {
+          margin: 0 0 30px 0;
+      }
+      .about-text {
+          max-width: 100%;
+      }
+  }

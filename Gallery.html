@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Section with Responsive Video</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+        
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            background: #fff;
+        }
+        
+        .navbar-brand {
+            color: #3391ff !important;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #3391ff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #000;
+        }
+        
+        .navbar-toggler {
+            border: none;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler .bi {
+            color: #3391ff;
+        }
+        /* HERO SECTION */
+        
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            padding: 60px 10%;
+            text-align: center;
+        }
+        
+        .hero-video-container {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .hero-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .hero-video-container .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-text {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            color: #fff;
+        }
+        
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: #3391ff;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin: 10px 0;
+            color: #3391ff;
+        }
+        
+        .highlight {
+            color: #3391ff;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border: 2px solid #3391ff;
+            background: #3391ff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2673cc;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .hero-text h3 {
+                font-size: 1.2rem;
+            }
+            .hero {
+                padding: 40px 5%;
+            }
+        }
+        
+        .modal-dialog {
+            max-width: 90%;
+            height: 90%;
+        }
+        
+        .modal-body {
+            height: 80vh;
+            padding: 0;
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3391ff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        #scrollToTopBtn:hover {
+            background: #2673cc;
+        }
+        
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+        
+        .mobile-nav-overlay.active {
+            display: flex;
+        }
+        
+        .mobile-nav-overlay .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #3391ff;
+            background: none;
+            border: none;
+        }
+        
+        .mobile-nav-overlay .social-icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-right: 50px;
+        }
+        
+        .mobile-nav-overlay .social-icons a {
+            font-size: 2rem;
+            color: #3391ff;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav-overlay .social-icons a:hover {
+            color: #000;
+        }
+        
+        .mobile-nav-overlay .nav-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-nav-overlay .nav-links a {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #3391ff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .mobile-nav-overlay .nav-links a:hover {
+            color: #000;
+        }
+        
+        @media (min-width: 992px) {
+            .mobile-nav-overlay {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg container-fluid px-5">
+            <a class="navbar-brand fw-bold" href="./Index.html">MySite</a>
+            <button class="navbar-toggler" type="button" onclick="toggleMobileNav()">
+        <span class="bi bi-list fs-1"></span>
+      </button>
+            <div class="collapse navbar-collapse justify-content-center d-none d-lg-flex">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Ecperience.html">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Testimonials.html">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Portfolio.html">Portfolio</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div id="mobileNav" class="mobile-nav-overlay">
+        <button class="close-btn" onclick="toggleMobileNav()">&times;</button>
+        <div class="social-icons">
+            <a href="https://www.behance.net/" target="_blank"><i class="bi bi-behance"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="nav-links">
+            <a href="." onclick="toggleMobileNav()">About</a>
+            <a href="./Services.html" onclick="toggleMobileNav()">Services</a>
+            <a href="./Ecperience.html" onclick="toggleMobileNav()">Experience</a>
+            <a href="./Gallery.html" onclick="toggleMobileNav()">Gallery</a>
+            <a href="./Testimonials.html" onclick="toggleMobileNav()">Testimonials</a>
+            <a href="./Contact.html" onclick="toggleMobileNav()">Contact</a>
+            <a href="./Portfolio.html" onclick="toggleMobileNav()">Portfolio</a>
+        </div>
+    </div>
+
+    <section class="gallery-section">
+        <h1>Lithstone Gallery</h1>
+
+        <!-- First and Second Rows -->
+        <div class="gallery-container">
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Crown Plaza Tampa</div>
+                <img src="./PNGFILE/after.png" alt="Crown Plaza Tampa">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Toddlers</div>
+                <img src="./PNGFILE/after.png" alt="Toddlers">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Young and restless</div>
+                <img src="./PNGFILE/after.png" alt="Young and restless">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Sweets for my sweet</div>
+                <img src="./PNGFILE/after.png" alt="Sweets for my sweet">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item landscape" onclick="openModal(this)">
+                <div class="image-title">River Hills Golf Club</div>
+                <img src="./PNGFILE/LANDSCAPE.jpg" alt="River Hills Golf Club">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Over the horizon</div>
+                <img src="./PNGFILE/after.png" alt="Over the horizon">
+                <div class="label">Lithstone</div>
+            </div>
+
+            <div class="gallery-item" onclick="openModal(this)">
+                <div class="image-title">Golden Gate Breeze</div>
+                <img src="./PNGFILE/after.png" alt="Golden Gate Breeze">
+                <div class="label">Lithstone</div>
+            </div>
+        </div>
+
+        <!-- Third Row: Single Full-Width Image -->
+        <div style="max-width: 1600px; height: auto; margin: 20px auto 0 auto;">
+            <div class="gallery-item large" onclick="openModal(this)">
+                <div class="image-title">Golden Bay Suites</div>
+                <img src="./PNGFILE/LANDSCAPE.jpg" alt="Golden Bay Suites" style="width: 100%; height: auto; max-height: 500px; object-fit: cover; border-radius: 8px;">
+                <div class="label">Lithstone</div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div id="modalCaption" class="caption"></div>
+        </div>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #f5f5f5;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .gallery-section {
+                padding: 40px 20px;
+                background-color: #f5f5f5;
+                text-align: center;
+            }
+            
+            .gallery-section h1 {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+                color: #333;
+            }
+            
+            .gallery-container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                max-width: 1600px;
+                margin: 0 auto;
+            }
+            
+            .gallery-item {
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+            
+            .gallery-item img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+                display: block;
+            }
+            
+            .gallery-item:hover img {
+                transform: scale(1.05);
+            }
+            
+            .gallery-item.landscape {
+                grid-column: span 2;
+            }
+            
+            .image-title {
+                font-weight: bold;
+                padding: 10px;
+                font-size: 16px;
+            }
+            
+            .label {
+                padding: 8px;
+                border-top: 1px solid #ccc;
+                font-size: 14px;
+                color: #666;
+            }
+            
+            .gallery-item.large img {
+                height: 100%;
+                max-height: 400px;
+                object-fit: cover;
+            }
+            /* Modal Styles */
+            
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                padding-top: 20px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+            
+            .modal-content {
+                display: block;
+                margin: auto;
+                max-width: 90%;
+                max-height: 80vh;
+                border-radius: 10px;
+            }
+            
+            .caption {
+                margin: 10px auto;
+                text-align: center;
+                color: #ccc;
+                font-size: 16px;
+            }
+            
+            .close {
+                position: absolute;
+                top: 25px;
+                right: 40px;
+                color: #f1f1f1;
+                font-size: 35px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            /* Responsive */
+            
+            @media (max-width: 1200px) {
+                .gallery-container {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .gallery-container {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .gallery-item.landscape {
+                    grid-column: span 2;
+                }
+                .gallery-item img {
+                    height: 220px;
+                }
+                .gallery-item.large img {
+                    height: 440px;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .gallery-container {
+                    grid-template-columns: 1fr;
+                }
+                .gallery-item img {
+                    height: 200px;
+                }
+                .gallery-item.landscape {
+                    grid-column: span 1;
+                }
+                .gallery-item.large img {
+                    height: 200px;
+                }
+            }
+        </style>
+        <script>
+            function openModal(el) {
+                const img = el.querySelector('img');
+                const caption = el.querySelector('.image-title').textContent;
+
+                document.getElementById("modalImage").src = img.src;
+                document.getElementById("modalCaption").innerText = caption;
+                document.getElementById("imageModal").style.display = "block";
+            }
+
+            function closeModal() {
+                document.getElementById("imageModal").style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                const modal = document.getElementById("imageModal");
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+        </script>
+
+    </section>
+
+
+
+
+    <!-- Scripts -->
+    <script>
+        const textList = ['UI/UX Designer', 'Photo Retoucher', 'Marketing Artist'];
+        const typingText = document.getElementById('typing-text');
+        let wordIndex = 0,
+            charIndex = 0,
+            isDeleting = false;
+
+        function type() {
+            const current = textList[wordIndex];
+            typingText.textContent = isDeleting ? current.substring(0, charIndex--) : current.substring(0, charIndex++);
+            if (!isDeleting && charIndex === current.length) {
+                isDeleting = true;
+                setTimeout(type, 1500);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % textList.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", type);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("hero-audio");
+            const unlockAudio = () => {
+                audio.play().catch(() => {});
+                document.removeEventListener("click", unlockAudio);
+            };
+            document.addEventListener("click", unlockAudio);
+        });
+
+        const heroSection = document.getElementById("home");
+        const heroVideo = document.getElementById("hero-video");
+        const heroAudio = document.getElementById("hero-audio");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    heroVideo.play();
+                    heroAudio.play().catch(() => {});
+                } else {
+                    heroVideo.pause();
+                    heroAudio.pause();
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        observer.observe(heroSection);
+
+        document.getElementById("scrollToTopBtn").addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        function toggleMobileNav() {
+            document.getElementById("mobileNav").classList.toggle("active");
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
